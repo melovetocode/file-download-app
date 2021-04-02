@@ -1,0 +1,89 @@
+<!-- Message to display after clicking download selected -->
+<div *ngIf="showModal" class="modal">
+  <div class="message-container">
+    <div class="title">Selected file(s) to download: 
+      <span class="close-modal" (click)="showModal=false"></span>
+    </div>
+    <div *ngFor="let file of selectedFileList | keyvalue ">
+      <p>
+        Path: {{ file.value.path }}<br/>
+        Device: {{ file.value.device }}
+      </p>
+    </div>
+    <div class="close-button-container">
+      <button (click)="showModal=false">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="showWarning" class="warning">
+  <span>Please select at least one file to download</span>
+  <span class="message-close" (click)="showWarning=false">&times;</span>
+</div>
+
+<!-- Container to hold a list of file display by rows -->
+<div class="container">
+  <!-- First row: includes "select all" checkbox, seletec file count, and a download link -->
+  <div class="wrapper">
+    <div class="header-row">
+      <div class="col-container xs">        
+        <label class="checkbox-element">
+          <input type="checkbox" [checked]="allChecked" [indeterminate]="isIndeterminate()" (click)="selectAll()">
+          <span class="checkmark" [ngClass]="{'checkmark': isIndeterminate() === false, 'icheckmark': isIndeterminate()}"></span>
+        </label>
+      </div>
+      <div class="col-container sm">
+        <span *ngIf="fileSelectedCount > 0; else noFileSelected">Selected {{ fileSelectedCount }}</span>
+        <ng-template #noFileSelected>None Selected</ng-template>
+      </div>
+      <div class="col-container md clickable dlBox" (click)="downloadFiles()">
+        <span>
+          <svg height="12pt" viewBox="0 0 512 512" width="12pt" xmlns="http://www.w3.org/2000/svg" id="fi_1665583">
+            <path d="m409.785156 278.5-153.785156 153.785156-153.785156-153.785156 28.285156-28.285156 105.5 105.5v-355.714844h40v355.714844l105.5-105.5zm102.214844 193.5h-512v40h512zm0 0"></path>
+          </svg>
+        </span>&nbsp;
+        <span>Download Selected</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-wrapper">
+    <!-- Second row: Column header -->
+    <div class="data-header">
+      <div class="checkbox-replacement">&nbsp;</div>
+      <div class="col-container sm">Name</div>
+      <div class="col-container sm">Device</div>
+      <div class="col-container lg">Path</div>
+      <div class="dot-replacement">&nbsp;</div>
+      <div class="col-container sm">Status</div>
+    </div>
+    
+    <!-- Third row and beyond: Loop through the data source and display file info by rows -->
+    <div *ngFor="let row of dataSource; let i=index" class="data-row" 
+      [ngClass]="{'row-selected': checkSelection(i)}">
+      
+      <div class="checkbox-container">        
+        <label class="checkbox-element">
+          <input type="checkbox" [checked]="checkSelection(i)" [disabled]="row.status !== 'available'" (click)="selectFile($event, i)">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <div class="col-container sm">
+        <span title="{{ row.name }}">{{ row.name }}</span>
+      </div>
+      <div class="col-container sm">
+        <span title="{{ row.device }}">{{ row.device }}</span>
+      </div>
+      <div class="col-container lg">
+        <span title="{{ row.path }}">{{ row.path }}</span>
+      </div>
+      <div [ngClass]="{ 'dot-replacement': row.status != 'available', 'col-container xs': row.status == 'available' }">
+        <span [ngClass]="{ 'dot': row.status === 'available' }">&nbsp;</span>
+      </div>
+      <div class="col-container sm">
+        <span title="{{ row.status }}">{{ row.status | titlecase }}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,310 @@
+/* Color scheme */
+$lightgray: #C2C2C2;
+$lightgreen: #90EE90;
+$white: #FFFFFF;
+$black: #000000;
+$black-coral: #495867;
+$blue-yonder: #577399;
+$shadow-blue: #718CAE;
+$beau-blue: #BDD5EA;
+$ghost-white: #F7F7FF;
+$orange-red-crayola: #FE5F55;
+
+
+* {    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* A transparent background for modal */
+.modal {
+    position: fixed; 
+    z-index: 10; 
+    left: 0;
+    top: 0;
+    width: 100vw; 
+    height: 100vh; 
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);     
+}
+
+.message-container {
+    padding: 20px;
+    margin: 230px auto auto auto;
+    width: 550px;
+    background-color: $beau-blue;
+    word-break: break-word;
+
+    .title {
+        font-size: 1.25rem;
+    }
+}
+
+.close-button-container {
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+
+    button {
+        padding: 12px 25px;
+        border: 0;
+        outline: none;
+        background-color: $black-coral;
+        color: $white;
+    }
+}
+ 
+/* Main container */
+.container {
+    min-width: 630px;
+    width: 80%;
+    margin: auto;
+}
+
+/* Wrapper for the header */
+.wrapper {
+    border: 1px solid $lightgray;
+    border-bottom: none;
+    padding-top: 20px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+
+.header-row {
+    padding: 10px 20px;
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: 1.25rem;
+        align-items: baseline;
+}
+
+.row-wrapper {
+    width: 100%;
+    border-bottom: 1px solid $lightgray;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.data-header {
+    padding: 10px 20px;
+    border: 1px solid $lightgray;
+    border-bottom: none;
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: 1.25rem;
+}
+
+.data-row {
+    padding: 10px 20px;
+    border: 1px solid $lightgray;
+    border-bottom: none;
+    display: flex;
+    flex-flow: row nowrap;
+
+    &:hover { 
+        background-color: $beau-blue; 
+        color: $black;
+    }
+}
+
+.col-container {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-right: 5px;
+
+    &.xs { width: 35px; }
+    &.sm { width: 200px; }
+    &.md { width: 250px; }
+    &.lg { width: 550px; }
+}
+
+.row-selected {
+    background-color: $shadow-blue;
+    color: $white;
+}
+
+.checkbox-replacement {
+    padding-right: 62px;
+}
+
+.checkbox-container {
+    padding-right: 35px;
+}
+
+/* Status indictor */
+.dot {
+    box-sizing: border-box;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: .125rem solid;
+    display: inline-block;
+    color: $lightgreen;
+    background-color: currentColor;
+}
+
+/* A placeholder when the status indictor is not present */
+.dot-replacement {
+    padding-right: 30px
+}
+
+/* Style for clickable element */
+.clickable {
+    cursor: pointer;
+
+    &:hover {
+        fill: $orange-red-crayola;
+        color: $orange-red-crayola;
+        border: solid $beau-blue;
+        background-color: $beau-blue;
+    }
+}
+
+/* Style for the Download Selected button */
+.dlBox {
+    border: solid $blue-yonder;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: $blue-yonder;
+    color: $white;
+    fill: $white;
+}
+
+/* Customize the label (the container) */
+.checkbox-element {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 8px;
+
+    /* Hide the browser's default checkbox */
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+}
+
+  
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: $white;
+    border: 1px solid $black;
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    &:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+}
+  
+/* On mouse-over, change the background color */
+.checkbox-element:hover input ~ .checkmark {
+    background-color: $blue-yonder;
+}
+
+/* When the checkbox is checked, change the background color */
+.checkbox-element input:checked ~ .checkmark {
+    background-color: $blue-yonder;
+
+    /* Show the checkmark when checked */
+    &:after {
+        display: block;
+    }
+}
+  
+/* Style the checkmark/indicator */
+.checkbox-element input ~ .checkmark:after {
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid $white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* Style the disabled checkbox */
+.checkbox-element input:disabled ~ .checkmark {
+    background-color: $lightgray;
+    border: solid $lightgray;
+    cursor: default;
+}
+
+  
+/* Style the disabled checkbox */
+.checkbox-element input:indeterminate ~ .icheckmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: $white;
+    border: 1px solid $blue-yonder;
+
+    &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        left: 5px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid $blue-yonder;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+}
+
+/* Warning message */
+.warning {
+    position: absolute; 
+    z-index: 10; 
+    top: 10;
+    right: 8px;
+    width: 500px;
+    padding: 20px;
+    background-color: $orange-red-crayola;
+    color: $white;
+    animation: msgmove 1s;
+    animation-timing-function: cubic-bezier(0,0,0.58,1);
+}
+
+/* Button for closing the warning message */
+.message-close {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+    color: $white;
+    font-size: 30px;
+    cursor: pointer;
+
+    &:hover {
+        color: $lightgray;
+      }
+  }
+  
+  @keyframes msgmove {
+    from {right: -30px;}
+    to {right: 8px;}
+  }
