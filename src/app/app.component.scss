@@ -47,9 +47,15 @@ $orange-red-crayola: #FE5F55;
     button {
         padding: 12px 25px;
         border: 0;
+        border-radius: 5px;
         outline: none;
         background-color: $black-coral;
         color: $white;
+        cursor: pointer;
+
+        &:hover {
+            color: $orange-red-crayola;
+        }
     }
 }
  

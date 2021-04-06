@@ -1,9 +1,7 @@
 <!-- Message to display after clicking download selected -->
 <div *ngIf="showModal" class="modal">
   <div class="message-container">
-    <div class="title">Selected file(s) to download: 
-      <span class="close-modal" (click)="showModal=false"></span>
-    </div>
+    <div class="title">Selected file(s) to download: </div>
     <div *ngFor="let file of selectedFileList | keyvalue ">
       <p>
         Path: {{ file.value.path }}<br/>
